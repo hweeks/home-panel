@@ -1,19 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { LightContainer } from './styles';
+import { lightProp } from '../../types';
 
-const Light = ({ name, isOn, level }) => (
-  <LightContainer>
-    <div>{name}</div>
-    <div>{isOn}</div>
-    {isOn === 'on' && <div>{level}%</div>}
+const Light = ({
+  name, isOn, level, id,
+}) => (
+  <LightContainer key={`light-${id}`}>
+    <div key={`${name}-${id}`}>{name}</div>
+    <div key={`${isOn}-${id}`}>{isOn}</div>
+    {isOn === 'on' && <div key={`${level}-${id}`}>{level}%</div>}
   </LightContainer>
 );
 
-Light.propTypes = {
-  name: PropTypes.string.isRequired,
-  isOn: PropTypes.string.isRequired,
-  level: PropTypes.number.isRequired,
-};
+Light.propTypes = lightProp;
 
 export default Light;

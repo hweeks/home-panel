@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 import Title from '../Title';
 import Column from '../Column';
 import Row from '../Row';
 import WeatherIcon, { Degree } from '../WeatherIcons';
+import { titleProp } from '../../types';
 
 const WeatherTitle = ({
   name, icon, temperature, summary,
@@ -11,22 +11,17 @@ const WeatherTitle = ({
   <Column>
     <Title>{name}</Title>
     <Column>
-      <Row>
+      <Row key={`temp-${name}`}>
         <WeatherIcon name={icon} />
         <span>{Math.ceil(temperature)}<Degree />F</span>
       </Row>
-      <Row>
+      <Row key={`sum-${icon}`}>
         {summary}
       </Row>
     </Column>
   </Column>
 );
 
-WeatherTitle.propTypes = {
-  name: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  temperature: PropTypes.number.isRequired,
-  summary: PropTypes.string.isRequired,
-}
+WeatherTitle.propTypes = titleProp;
 
 export default WeatherTitle;

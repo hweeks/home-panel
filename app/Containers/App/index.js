@@ -9,36 +9,31 @@ import baseStyles, { AppContainer } from './styles';
 
 class App extends PureComponent {
   componentDidMount() {
-    const { getLights, getWeather, getGroups } = this.props;
+    const { getLights, getWeather } = this.props;
     getLights();
     getWeather();
-    getGroups();
   }
   render() {
-    const { lightData, groupData, weatherData } = this.props;
+    const { lightData, weatherData } = this.props;
     baseStyles();
     return (
       <AppContainer>
-        <Hue lightData={lightData} groupData={groupData} />
+        <Hue lightData={lightData} />
         <Weather weatherData={weatherData} />
       </AppContainer>
     );
   }
 }
 
-// TODO Custom types
 App.propTypes = {
-  lightData: PropTypes.object,
-  groupData: PropTypes.object,
-  weatherData: PropTypes.object,
+  lightData: PropTypes.array,
+  weatherData: PropTypes.array,
   getLights: PropTypes.func.isRequired,
-  getGroups: PropTypes.func.isRequired,
   getWeather: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
   lightData: null,
-  groupData: null,
   weatherData: null,
 };
 
@@ -49,7 +44,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getLights: actions.getLightStatus,
-  getGroups: actions.getGroupsStatus,
   getWeather: actions.getForecast,
 }, dispatch);
 
