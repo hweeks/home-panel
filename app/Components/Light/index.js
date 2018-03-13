@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { LightContainer } from './styles';
-import {
-  lightProp,
-} from '../../types'
+import { lightProp } from '../../types';
 
-const Light = ({ name, isOn, level, id }) => (
+const Light = ({
+  name, isOn, level, id,
+}) => (
   <LightContainer key={`light-${id}`}>
     <div key={`${name}-${id}`}>{name}</div>
     <div key={`${isOn}-${id}`}>{isOn}</div>
@@ -13,6 +12,6 @@ const Light = ({ name, isOn, level, id }) => (
   </LightContainer>
 );
 
-Light.propTypes = lightProp
+Light.propTypes = lightProp;
 
 export default Light;

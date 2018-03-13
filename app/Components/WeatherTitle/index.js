@@ -1,12 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 import Title from '../Title';
 import Column from '../Column';
 import Row from '../Row';
 import WeatherIcon, { Degree } from '../WeatherIcons';
-import {
-  titleProp,
-} from '../../types'
+import { titleProp } from '../../types';
 
 const WeatherTitle = ({
   name, icon, temperature, summary,
@@ -25,6 +22,6 @@ const WeatherTitle = ({
   </Column>
 );
 
-WeatherTitle.propTypes = titleProp
+WeatherTitle.propTypes = titleProp;
 
 export default WeatherTitle;

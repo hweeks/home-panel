@@ -11,7 +11,7 @@ const Row = ({ children }) => (
 Row.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element
+    PropTypes.element,
   ]).isRequired,
 };
 

@@ -8,7 +8,7 @@ import Forecast from '../Forecast';
 import {
   forecastProp,
   titleProp,
-} from '../../types'
+} from '../../types';
 
 const Weather = ({ id, titleProps, forecastProps }) => (
   <Column key={`weather-${id}`}>
@@ -21,14 +21,14 @@ Weather.propTypes = {
   id: PropTypes.number,
   titleProps: PropTypes.shape(titleProp),
   forecastProps: PropTypes.arrayOf(PropTypes.shape(forecastProp)),
-}
+};
 
 const WeatherWrapper = ({ weatherData }) => {
   if (!weatherData) {
-    return <Row key={'weather-loader'}><Loading /></Row>;
+    return <Row key="weather-loader"><Loading /></Row>;
   }
   return (
-    <Row key={'weather-wrapper'}>
+    <Row key="weather-wrapper">
       {weatherData.map((props, id) => <Weather id={id} {...props} />)}
     </Row>
   );

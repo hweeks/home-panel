@@ -1,4 +1,4 @@
-import flow from 'lodash.flow'
+import flow from 'lodash.flow';
 import {
   GET_WEATHER,
   RECEIVE_WEATHER,
@@ -34,9 +34,9 @@ const dailyProps = (weatherData) => {
 };
 
 const weatherFetched = (state, payload) => {
-  const weatherData = payload.map(flow([titleProps, dailyProps]))
+  const weatherData = payload.map(flow([titleProps, dailyProps]));
   return Object.assign({}, state, { weatherData });
-}
+};
 
 const weatherFailed = (state, payload) => Object.assign({}, state, { errorMessage: payload });
 

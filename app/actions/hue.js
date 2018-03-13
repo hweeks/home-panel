@@ -23,7 +23,7 @@ function failLights(res) {
   };
 }
 
-const returnJson = res => res.json()
+const returnJson = res => res.json();
 
 export function getLightStatus() {
   return (dispatch) => {
@@ -31,14 +31,8 @@ export function getLightStatus() {
     const { hue } = config;
     const lightsFetch = [
       fetch(`${hue}/lights`),
-      fetch(`${hue}/groups`)
-    ]
-    return Promise.all(lightsFetch).then(
-      results => Promise.all(results.map(returnJson))
-    ).then(
-      res => dispatch(receiveLights(res))
-    ).catch(
-      res => dispatch(failLights(res))
-    );
+      fetch(`${hue}/groups`),
+    ];
+    return Promise.all(lightsFetch).then(results => Promise.all(results.map(returnJson))).then(res => dispatch(receiveLights(res))).catch(res => dispatch(failLights(res)));
   };
 }
