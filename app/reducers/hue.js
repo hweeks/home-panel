@@ -1,3 +1,4 @@
+import flow from 'lodash.flow'
 import {
   GET_LIGHTS,
   RECEIVE_LIGHTS,
@@ -7,20 +8,38 @@ import {
   FAIL_GROUPS,
 } from '../actions';
 
+const buildLightObject = (light) => {
+  const { name, state } = light[1];
+  const id = light[0];
+  const level = Math.ceil((state.bri / 254) / 0.01);
+  const isOn = state.on ? 'on' : 'off';
+  return Object.assign({}, { name, isOn, level, id });
+};
+
+const combineGroupAndLight = (lights, groups) => {
+  const lightArr = Object.entries(lights).map(buildLightObject);
+  const groupArr = Object.entries(groups).map(info => Object.assign({}, info[1]));
+  return groupArr.map((group) => {
+    let {lights, name} = group
+    lights = lights.map(val => lightArr.find(item => item.id === val));
+    return {lights, name};
+  });
+};
+
 const initialState = {
-  isLoading: true,
   lightData: null,
 };
 
-const lightsFetched = (state, payload) => {
+const lightsFetched = (state, [lights, groups]) => {
   const lightObj = {
-    lightData: payload,
+    lightData: combineGroupAndLight(lights, groups),
     isLoading: false,
   };
   return Object.assign({}, state, lightObj);
 };
 
 const groupsFetched = (state, payload) => {
+  debugger
   const groupObj = {
     groupData: payload,
     isLoading: false,

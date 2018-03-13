@@ -4,11 +4,14 @@ import Column from '../Column';
 import Row from '../Row';
 import WeatherIcon, { Degree } from '../WeatherIcons';
 import { Summary, Temp } from './styles';
+import {
+  forecastProp,
+} from '../../types'
 
 const Forecast = ({
   icon, high, low, summary,
 }) => (
-  <Column>
+  <Column key={`temp-${high-low}`}>
     <Column>
       <Row>
         <Temp>High {Math.ceil(high)}<Degree />F</Temp>
@@ -22,11 +25,6 @@ const Forecast = ({
   </Column>
 );
 
-Forecast.propTypes = {
-  icon: PropTypes.string.isRequired,
-  high: PropTypes.number.isRequired,
-  low: PropTypes.number.isRequired,
-  summary: PropTypes.string.isRequired,
-};
+Forecast.propTypes = forecastProp
 
 export default Forecast;
