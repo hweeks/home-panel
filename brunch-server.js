@@ -15,7 +15,7 @@ app.get('/api/weather/:key/:cords', (req, res) => {
 })
 
 module.exports = (config, callback) => {
-  app.listen(config.port, function () {
+  app.listen(config.port, '0.0.0.0', function () {
     console.log(`Home Panel listening on: ${config.port}!`);
     callback();
   });

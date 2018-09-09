@@ -6,6 +6,7 @@ import Hue from '../../Components/Hue';
 import Weather from '../../Components/Weather';
 import * as actions from '../../actions';
 import baseStyles, { AppContainer } from './styles';
+import { lightProp, titleProp } from '../../types';
 
 class App extends PureComponent {
   componentDidMount() {
@@ -14,21 +15,22 @@ class App extends PureComponent {
     getWeather();
   }
   render() {
-    const { lightData, weatherData } = this.props;
+    const { lightData, weatherData, setLights } = this.props;
     baseStyles();
     return (
       <AppContainer>
-        <Hue lightData={lightData} />
         <Weather weatherData={weatherData} />
+        <Hue lightData={lightData} setLights={setLights} />
       </AppContainer>
     );
   }
 }
 
 App.propTypes = {
-  lightData: PropTypes.array,
-  weatherData: PropTypes.array,
+  lightData: PropTypes.arrayOf(PropTypes.shape(lightProp)),
+  weatherData: PropTypes.arrayOf(PropTypes.shape(titleProp)),
   getLights: PropTypes.func.isRequired,
+  setLights: PropTypes.func.isRequired,
   getWeather: PropTypes.func.isRequired,
 };
 
@@ -44,6 +46,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getLights: actions.getLightStatus,
+  setLights: actions.setLightStatus,
   getWeather: actions.getForecast,
 }, dispatch);
 

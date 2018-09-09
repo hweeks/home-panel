@@ -11,6 +11,7 @@ const WeatherTitle = ({
   <Column>
     <Title>{name}</Title>
     <Column>
+      <Row>{new Date().toDateString()}</Row>
       <Row key={`temp-${name}`}>
         <WeatherIcon name={icon} />
         <span>{Math.ceil(temperature)}<Degree />F</span>

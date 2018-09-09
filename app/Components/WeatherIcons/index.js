@@ -6,11 +6,15 @@ export const wi = styled.i`
   font-family: 'weathericons';
   font-style: normal;
   font-weight: normal;
+  font-size: 44px;
+  padding: 8px;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 `;
 export const Degree = wi.extend`
+  font-size: 20px;
+  padding: 2px;
   :before{
     content: "\f042";
   }

@@ -9,16 +9,14 @@ const Forecast = ({
   icon, high, low, summary,
 }) => (
   <Column key={`temp-${high - low}`}>
-    <Column>
-      <Row>
-        <Temp>High {Math.ceil(high)}<Degree />F</Temp>
-        <WeatherIcon name={icon} />
-        <Temp>Low {Math.ceil(low)}<Degree />F</Temp>
-      </Row>
-      <Summary>
-        {summary}
-      </Summary>
-    </Column>
+    <Row>
+      <Temp>High {Math.ceil(high)}<Degree />F</Temp>
+      <WeatherIcon name={icon} />
+      <Temp>Low {Math.ceil(low)}<Degree />F</Temp>
+    </Row>
+    <Summary>
+      {summary}
+    </Summary>
   </Column>
 );
 

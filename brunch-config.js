@@ -9,3 +9,5 @@ exports.plugins = {
 exports.paths = {
   public: './build'
 }
+
+exports.server = {run: true}

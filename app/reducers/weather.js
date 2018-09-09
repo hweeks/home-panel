@@ -9,13 +9,13 @@ const initialState = {
   weatherData: null,
 };
 
-const titleProps = (weatherData) => {
-  const { currently: { icon, temperature, summary } } = weatherData;
+const titlePropsBuilder = (weatherData) => {
+  const { currently: { icon, temperature }, daily: { summary } } = weatherData;
   const { name } = weatherData;
-  const titleProps = {
+  const titlePropsBuilt = {
     name, icon, temperature, summary,
   };
-  return Object.assign({}, { titleProps }, weatherData);
+  return Object.assign({}, { titleProps: titlePropsBuilt }, weatherData);
 };
 
 const simpleProps = (dayData) => {
@@ -29,12 +29,12 @@ const simpleProps = (dayData) => {
 const dailyProps = (weatherData) => {
   const { daily: { data } } = weatherData;
   const { titleProps } = weatherData;
-  const forecastProps = data.map(simpleProps);
+  const forecastProps = data.map(simpleProps).slice(0, 4);
   return Object.assign({}, { forecastProps }, { titleProps });
 };
 
 const weatherFetched = (state, payload) => {
-  const weatherData = payload.map(flow([titleProps, dailyProps]));
+  const weatherData = payload.map(flow([titlePropsBuilder, dailyProps]));
   return Object.assign({}, state, { weatherData });
 };
 

@@ -32,6 +32,10 @@ export function getForecast() {
     const { key, cities } = weather;
     const names = cities.map(item => item.name);
     const citiesFetch = cities.map(({ cords }) => fetch(`api/weather/${key}/${cords}`));
-    return Promise.all(citiesFetch).then(results => Promise.all(results.map(res => res.json()))).then(results => dispatch(receiveWeather(results, names))).catch(res => dispatch(failWeather(res)));
+    return Promise.all(citiesFetch).then(
+      results => Promise.all(results.map(res => res.json())),
+    ).then(
+      results => dispatch(receiveWeather(results, names)),
+    ).catch(res => dispatch(failWeather(res)));
   };
 }
