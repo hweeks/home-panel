@@ -17,7 +17,7 @@ the idea behind this project is a quick overview of your smart home and daily we
 
 ## hpconfig
 
-Inside of the `app/` folder you need to place a config of this shape:
+Inside of the `app/` folder you need to place a config named `hpconfig.js` of this shape:
 
 ```js
 const config = {
@@ -56,9 +56,6 @@ Instead of doing CORS work, I decided it would be easiest to just use axios and 
 
 ## TODOS
 
-  * add the ability to control lights
   * set weather to refresh every 15 minutes
   * add nest integration
   * tests need to actually exist
-  * update lint to match my needs
-  * custom PropTypes

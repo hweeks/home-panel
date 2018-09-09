@@ -33,6 +33,19 @@ export function getLightStatus() {
       fetch(`${hue}/lights`),
       fetch(`${hue}/groups`),
     ];
-    return Promise.all(lightsFetch).then(results => Promise.all(results.map(returnJson))).then(res => dispatch(receiveLights(res))).catch(res => dispatch(failLights(res)));
+    return Promise.all(lightsFetch).then(
+      results => Promise.all(results.map(returnJson)),
+    ).then(res => dispatch(receiveLights(res))).catch(res => dispatch(failLights(res)));
+  };
+}
+
+export function setLightStatus(ids, state) {
+  return (dispatch) => {
+    const { hue } = config;
+    const putPayload = { method: 'PUT', body: JSON.stringify({ on: state }) };
+    const lights = ids.map(id => fetch(`${hue}/lights/${id}/state`, putPayload));
+    return Promise.all(lights).then(
+      results => Promise.all(results.map(returnJson)),
+    ).then(() => getLightStatus()(dispatch)).catch(res => dispatch(failLights(res)));
   };
 }

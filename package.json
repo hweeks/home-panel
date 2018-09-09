@@ -4,7 +4,7 @@
   "description": "A simple hud for smart home health",
   "main": "src/index.js",
   "scripts": {
-    "start": "brunch w -s --server",
+    "start": "brunch w -s",
     "lint": "eslint app/",
     "test": "jest app/"
   },

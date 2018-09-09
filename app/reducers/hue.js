@@ -17,11 +17,12 @@ const buildLightObject = (light) => {
   });
 };
 
-const combineGroupAndLight = (lights, groups) => {
-  const lightArr = Object.entries(lights).map(buildLightObject);
+const combineGroupAndLight = (lightsIn, groups) => {
+  const lightArr = Object.entries(lightsIn).map(buildLightObject);
   const groupArr = Object.entries(groups).map(info => Object.assign({}, info[1]));
   return groupArr.map((group) => {
-    let { lights, name } = group;
+    let { lights } = group;
+    const { name } = group;
     lights = lights.map(val => lightArr.find(item => item.id === val));
     return { lights, name };
   });

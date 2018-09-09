@@ -13,14 +13,14 @@ import {
 const Weather = ({ id, titleProps, forecastProps }) => (
   <Column key={`weather-${id}`}>
     <WeatherTitle {...titleProps} />
-    {forecastProps.map(dayProp => <Forecast {...dayProp} />)}
+    {forecastProps.map((dayProp, index) => <Forecast {...dayProp} currentDay={index} />)}
   </Column>
 );
 
 Weather.propTypes = {
-  id: PropTypes.number,
-  titleProps: PropTypes.shape(titleProp),
-  forecastProps: PropTypes.arrayOf(PropTypes.shape(forecastProp)),
+  id: PropTypes.number.isRequired,
+  titleProps: PropTypes.shape(titleProp).isRequired,
+  forecastProps: PropTypes.arrayOf(PropTypes.shape(forecastProp)).isRequired,
 };
 
 const WeatherWrapper = ({ weatherData }) => {
@@ -28,14 +28,14 @@ const WeatherWrapper = ({ weatherData }) => {
     return <Row key="weather-loader"><Loading /></Row>;
   }
   return (
-    <Row key="weather-wrapper">
+    <Row key="weather-wrapper" maxWidth={50}>
       {weatherData.map((props, id) => <Weather id={id} {...props} />)}
     </Row>
   );
 };
 
 WeatherWrapper.propTypes = {
-  weatherData: PropTypes.arrayOf(PropTypes.shape(Weather.propTypes)),
+  weatherData: PropTypes.arrayOf(PropTypes.shape(Weather.propTypes)).isRequired,
 };
 
 export default WeatherWrapper;
